@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather — Live Forecast Dashboard</title>
+    <meta
+      name="description"
+      content="Advanced dynamic weather forecasting dashboard powered by Open-Meteo."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="logo" href="#"
+          ><span class="logo-mark">◒</span> Weather<span>/</span>Forecast</a
+        >
+        <div class="top-actions">
+          <button id="unitBtn" class="top-btn">°C</button>
+          <button id="themeBtn" class="top-btn">◐</button>
+          <button id="locBtn" class="top-btn accent">⌖ Use my location</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div class="search-area">
+            <div class="eyebrow">LIVE WEATHER INTELLIGENCE</div>
+            <h1>Forecasts that show you <em>what’s next.</em></h1>
+            <p>
+              Search any city for live conditions, hourly changes, a 7-day
+              forecast, wind, humidity, precipitation and sunrise/sunset.
+            </p>
+            <form id="searchForm" class="search">
+              <span>⌕</span>
+              <input
+                id="searchInput"
+                placeholder="Search a city — Cairo, London, Tokyo..."
+                autocomplete="off"
+              />
+              <button>Search</button>
+            </form>
+            <div id="suggestions" class="suggestions"></div>
+            <div class="favorites" id="favorites"></div>
+          </div>
+          <div class="hero-art" id="heroArt">
+            <div class="sun"></div>
+            <div class="cloud cloud-a"></div>
+            <div class="cloud cloud-b"></div>
+            <div class="forecast-orbit"></div>
+          </div>
+        </section>
+
+        <section class="dashboard">
+          <div class="location-line">
+            <div>
+              <span class="pin">⌖</span>
+              <strong id="placeName">Cairo, Egypt</strong
+              ><span id="coords" class="muted"></span>
+            </div>
+            <span id="updated" class="updated">Loading forecast…</span>
+          </div>
+
+          <div class="current-grid">
+            <article class="current-card">
+              <div class="current-main">
+                <div>
+                  <span class="label">CURRENT CONDITIONS</span>
+                  <div class="temp-row">
+                    <strong id="currentTemp">--</strong
+                    ><span id="tempUnit">°C</span>
+                  </div>
+                  <div id="currentSummary" class="summary">Loading…</div>
+                  <div class="feels">Feels like <b id="feels">--</b></div>
+                </div>
+                <div id="weatherIcon" class="weather-icon">☀</div>
+              </div>
+              <div class="metric-row">
+                <div><span>Humidity</span><b id="humidity">--</b></div>
+                <div><span>Wind</span><b id="wind">--</b></div>
+                <div><span>Pressure</span><b id="pressure">--</b></div>
+                <div><span>Visibility</span><b id="visibility">--</b></div>
+              </div>
+            </article>
+            <article class="insight-card">
+              <div class="card-head">
+                <span>WEATHER INSIGHT</span><span class="live-dot">● LIVE</span>
+              </div>
+              <h3 id="insightTitle">Analysing the forecast…</h3>
+              <p id="insightText">
+                Loading weather patterns and precipitation probability.
+              </p>
+              <div class="insight-meter"><i id="insightFill"></i></div>
+              <div class="insight-foot">
+                <span>Precipitation chance</span><b id="rainChance">--</b>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-title">
+            <div>
+              <span class="label">NEXT 24 HOURS</span>
+              <h2>Hourly forecast</h2>
+            </div>
+            <div class="scroll-hint">Scroll →</div>
+          </div>
+          <div id="hourly" class="hourly-scroll"></div>
+
+          <div class="section-title">
+            <div>
+              <span class="label">7-DAY OUTLOOK</span>
+              <h2>Daily forecast</h2>
+            </div>
+          </div>
+          <div id="daily" class="daily-grid"></div>
+
+          <div class="lower-grid">
+            <article class="panel chart-panel">
+              <div class="panel-head">
+                <div>
+                  <span class="label">TEMPERATURE</span>
+                  <h3>48-hour trend</h3>
+                </div>
+                <div class="legend">
+                  <span><i class="dot temp"></i>Temperature</span
+                  ><span><i class="dot rain"></i>Rain chance</span>
+                </div>
+              </div>
+              <canvas id="tempChart"></canvas>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="label">WIND</span>
+                  <h3>Wind conditions</h3>
+                </div>
+              </div>
+              <div id="windPanel" class="wind-panel"></div>
+            </article>
+          </div>
+
+          <div class="lower-grid second">
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="label">SOLAR</span>
+                  <h3>Sun cycle</h3>
+                </div>
+              </div>
+              <div class="sun-cycle">
+                <div><span>☼ Sunrise</span><b id="sunrise">--</b></div>
+                <div class="arc"><i id="sunDot"></i></div>
+                <div><span>☾ Sunset</span><b id="sunset">--</b></div>
+              </div>
+            </article>
+            <article class="panel">
+              <div class="panel-head">
+                <div>
+                  <span class="label">DETAILS</span>
+                  <h3>Atmospheric data</h3>
+                </div>
+              </div>
+              <div id="details" class="details-grid"></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
