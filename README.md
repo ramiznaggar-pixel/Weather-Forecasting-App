@@ -4,11 +4,11 @@ A portfolio-quality weather website built with vanilla HTML/CSS/JavaScript.
 
 ## Features
 - Live global city search
-- Geolocation / "Use my location"
+- Geolocation 
 - Current conditions
-- 24-hour forecast strip
+- 24 hour forecast strip
 - 7-day forecast
-- 48-hour temperature + rain probability chart drawn with Canvas
+- 48 hour temperature + rain probability chart drawn with Canvas
 - Wind condition visualization
 - Humidity, pressure, visibility, wind gusts and direction
 - Sunrise / sunset
@@ -23,15 +23,4 @@ The project uses Open-Meteo's Geocoding API for location search and Weather Fore
 https://open-meteo.com/en/docs
 https://open-meteo.com/en/docs/geocoding-api
 
-## Run
-Open `index.html` or use VS Code Live Server.
 
-## Portfolio upgrade ideas
-- Add weather alerts
-- Add historical weather
-- Add air quality
-- Add map layers
-- Add precipitation radar
-- Add accounts + saved cities database
-- Add PWA install/offline caching
-- Add backend caching and analytics
